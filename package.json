@@ -1,0 +1,14 @@
+{
+  "name": "math-number-guessing-game",
+  "version": "1.0.0",
+  "description": "A math game where you need to guess a random number using math operators.",
+  "main": "app.js",
+  "scripts": {
+    "compile:sass": "sass --watch sass/main.scss css/style.css"
+  },
+  "author": "Ryan Tremmel",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.69.5"
+  }
+}

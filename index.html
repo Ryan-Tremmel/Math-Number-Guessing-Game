@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Number Guessing - The Game</title>
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <div class="modal" id="modal">
+      <p class="modal__text">
+        Thank you for playing my game! Here's how to play:
+      </p>
+      <p class="modal__text">
+        A random number between 1 and 200 will be generated, and it is your goal
+        to determine what that number is using one of the four mathematical
+        operations. You will have 12 lives, and can only use each operation 3
+        times. Don't worry about which number to put where for substraction or
+        division, as it will take the larger number and operate on the smaller
+        regardless of which input you place it in. If your guess is close by 25
+        or 10 in either direction, the game will inform you. Goodluck!
+      </p>
+      <button class="btn modal__btn">I Understand!</button>
+    </div>
+    <div class="app-container" id="app">
+      <header class="header">
+        <h1 class="header__title">Guess the Number!</h1>
+        <div class="header__top">
+          <button class="btn btn--again">Play Again!</button>
+          <div class="header__rules-container">
+            <ion-icon
+              class="header__rules-arrow"
+              name="arrow-down-outline"
+            ></ion-icon>
+            <button class="btn--rules">Rules</button>
+          </div>
+          <p class="header__between">Between 1 and 200</p>
+        </div>
+        <div class="header__number">
+          <span class="header__number-question">?</span>
+        </div>
+        <div class="header__line"></div>
+      </header>
+      <main>
+        <div class="section__score">
+          <p class="section__score-highscore-p">
+            Highscore:<span class="section__score-highscore">0</span>
+          </p>
+          <p class="section__score-lives-p">
+            Lives:<span class="section__score-lives">12</span>
+          </p>
+          <p class="section__score-message">Start guessing...</p>
+        </div>
+        <input type="number" class="section__guess section__guess--left" />
+        <div class="section__operators">
+          <div class="add section__operators-flex">
+            <button class="btn section__operators-btn add">+</button>
+            <button class="btn section__operators-btn add">+</button>
+            <button class="btn section__operators-btn add">+</button>
+          </div>
+          <div class="subract section__operators-flex">
+            <button class="btn section__operators-btn sub">-</button>
+            <button class="btn section__operators-btn sub">-</button>
+            <button class="btn section__operators-btn sub">-</button>
+          </div>
+          <div class="multiply section__operators-flex">
+            <button class="btn section__operators-btn mult">×</button>
+            <button class="btn section__operators-btn mult">×</button>
+            <button class="btn section__operators-btn mult">×</button>
+          </div>
+          <div class="divide section__operators-flex">
+            <button class="btn section__operators-btn div">⁒</button>
+            <button class="btn section__operators-btn div">⁒</button>
+            <button class="btn section__operators-btn div">⁒</button>
+          </div>
+        </div>
+        <button class="btn btn--check">Check!</button>
+        <input type="number" class="section__guess section__guess--right" />
+      </main>
+    </div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

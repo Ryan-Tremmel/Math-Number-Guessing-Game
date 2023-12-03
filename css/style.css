@@ -1,0 +1,297 @@
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap");
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  font-family: "Press Start 2P", sans-serif;
+  color: #eee;
+  background-color: #222;
+  /* background-color: #60b347; */
+}
+
+/***** Animations *****/
+@keyframes buttonScale {
+  0% {
+    transform: scale(100%);
+  }
+  50% {
+    transform: scale(110%);
+  }
+  100% {
+    transform: scale(100%);
+  }
+}
+@keyframes modalArrowTranslate {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(1.5rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+/***** Utility Classes *****/
+.disabled {
+  pointer-events: none;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 5;
+}
+
+/***** App Classes *****/
+.modal {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 15vh;
+  left: 50%;
+  transform: translate(-50%);
+  width: 90%;
+  z-index: 10;
+}
+.modal__btn {
+  align-self: center;
+  margin-top: 4rem;
+  padding: 2rem 4rem;
+  width: 20%;
+}
+.modal__text {
+  font-size: 2rem;
+  line-height: 1.8;
+}
+.modal__text:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.app-container {
+  opacity: 15%;
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  row-gap: 2rem;
+  padding: 3.2rem;
+}
+
+.btn {
+  display: inline-block;
+  border: none;
+  background-color: #eee;
+  color: #222;
+  cursor: pointer;
+  font-size: 2rem;
+  transition: all 0.2s;
+}
+.btn--again {
+  grid-row: 1;
+  font-family: inherit;
+  font-size: 1.2rem;
+  padding: 2rem 4rem;
+  width: 15%;
+}
+.btn--rules {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-style: italic;
+  font-size: 1.8rem;
+}
+.btn--check {
+  grid-column: 2/3;
+  grid-row: check;
+  align-self: start;
+  margin-top: 4rem;
+  padding: 2rem 4rem;
+  width: 100%;
+}
+.btn:hover {
+  background-color: #a7a7a7;
+  animation: buttonScale 1s linear infinite;
+}
+
+/***** Layout (from top to bottom, approx) *****/
+/******************************/
+/***** HEADER *****************/
+/******************************/
+.header {
+  display: grid;
+  grid-row: 1;
+  grid-template-rows: repeat(3, 1fr);
+  row-gap: 4rem;
+  position: relative;
+  height: 35vh;
+  margin-bottom: 9.6rem;
+}
+.header__title {
+  grid-row: 2;
+  font-size: 3.5rem;
+  text-align: center;
+  width: 100%;
+}
+.header__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+.header__rules-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  color: #eee;
+  transition: all 0.2s;
+}
+.header__rules-container:hover {
+  color: #a7a7a7;
+  transform: scale(120%) translateY(-1rem);
+}
+.header__rules-arrow {
+  display: inline-block;
+  width: 3.5rem;
+  height: 3.5rem;
+  stroke-width: 0;
+  stroke: #eee;
+  fill: #eee;
+}
+.header__rules-container:hover > .header__rules-arrow {
+  animation: modalArrowTranslate 1.5s linear infinite;
+}
+.header__between {
+  grid-row: 1;
+  font-size: 1.4rem;
+}
+.header__number {
+  grid-column: -1;
+  grid-row: 3;
+  justify-self: center;
+  background: #eee;
+  color: #333;
+  font-size: 6rem;
+  width: 15rem;
+  padding: 4rem 0rem;
+  z-index: 2;
+}
+.header__number-question {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header__line {
+  grid-column: -1;
+  grid-row: 3;
+  justify-self: center;
+  align-self: center;
+  background-color: #eee;
+  height: 15px;
+  width: 90%;
+  z-index: 1;
+}
+
+/******************************/
+/***** MAIN *******************/
+/******************************/
+main {
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: [score] 1fr [middle] 1fr [check] 1fr;
+  justify-items: center;
+  align-items: center;
+  padding: 0;
+}
+
+.section__score {
+  grid-column: 2/3;
+  grid-row: score;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  width: 200%;
+}
+.section__score-highscore-p {
+  margin-bottom: 2rem;
+}
+.section__score-lives-p {
+  margin-bottom: 2rem;
+}
+.section__guess {
+  background: none;
+  border: 4px solid #eee;
+  font-family: inherit;
+  color: inherit;
+  font-size: 5rem;
+  padding: 2.5rem;
+  width: 25rem;
+  text-align: center;
+}
+.section__guess--left {
+  grid-column: 1/2;
+  grid-row: middle;
+  justify-self: end;
+}
+.section__guess--right {
+  grid-column: 3;
+  grid-row: middle;
+  justify-self: start;
+}
+.section__operators {
+  grid-column: 2/3;
+  grid-row: 2;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.section__operators-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.section__operators-btn {
+  font-size: 3rem;
+  width: 4rem;
+  margin: 1rem 2rem 2rem 2rem;
+}
+.section__operators-btn--active {
+  background-color: red;
+}
+.section__operators-btn--active:hover {
+  background-color: rgb(200, 0, 0);
+}
+.section__operators-btn--disabled {
+  background-color: #a7a7a7;
+}
+
+.check {
+  grid-column-start: 2;
+  justify-self: center;
+  align-self: center;
+}
+
+/*# sourceMappingURL=style.css.map */

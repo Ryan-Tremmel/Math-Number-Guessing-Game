@@ -223,8 +223,12 @@ class App {
 
     // DEVELOPMENT USE ONLY //////////////////////////////
 
+    /*
+
     console.log(`Number to Guess: ${this.number}`);
     console.log(`Player Guess: ${this.guess}`);
+
+    */
 
     //////////////////////////////////////////////////////
 

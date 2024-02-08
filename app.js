@@ -43,12 +43,7 @@ class App {
   constructor() {
     ///////////////////////////////////////
     // Event Listeners ////////////////////
-
-    this.__modalEventListener();
-    this.__rulesEventListener();
-    this.__clickEventListener();
-    this.__operationsEventListener();
-    this.__checkEventListener();
+    this.__setupEventListeners();
 
     ////////////////////////////////////////
     // Functions ///////////////////////////
@@ -59,33 +54,15 @@ class App {
   ///////////////////////////////////////
   // Event Listeners ////////////////////
 
-  // Event listener for modal window and button inside modal
-  __modalEventListener() {
-    document.querySelector('.modal__btn').addEventListener('click', closeModal);
-  }
-
-  // Event listener for rules modal to bring up modal window
-
-  __rulesEventListener() {
-    this.btnRules.addEventListener('click', showModal);
-  }
-
-  // Event listenter for Play Again! button
-  __clickEventListener() {
-    this.btnAgain.addEventListener('click', this.__resetGame.bind(this));
-  }
-
-  // Event listener for operators section
-  __operationsEventListener() {
+  __setupEventListeners() {
+    document.querySelector('.modal__btn').addEventListener('click', closeModal); // Event listener for modal window and button inside modal
+    this.btnRules.addEventListener('click', showModal); // Event listener for rules modal to bring up modal window
+    this.btnAgain.addEventListener('click', this.__resetGame.bind(this)); // Event listenter for Play Again! button
     this.operatorsEl.addEventListener(
       'click',
       this.__selectOperation.bind(this)
-    );
-  }
-
-  // Event listener for Check! button
-  __checkEventListener() {
-    this.btnCheck.addEventListener('click', this.__checkInputs.bind(this));
+    ); // Event listener for operators section
+    this.btnCheck.addEventListener('click', this.__checkInputs.bind(this)); // Event listener for Check! button
   }
 
   //////////////////////////////////
@@ -260,6 +237,8 @@ class App {
 
     // 4) ----- Number Checking -----
 
+    let difference = Math.abs(this.number - this.guess);
+
     // If guess is INCORRECT, checks number of lives and if lives < 1, initiates lose game function - otherwise removes a life and displays how close the player was
     if (this.guess !== this.number) {
       if (this.__lives >= 1) {
@@ -273,17 +252,17 @@ class App {
         }
 
         // If player's guess is 25 off away from the number to guess
-        if (this.number > this.guess && this.guess + 25 > this.number) {
+        if (difference < 25 && this.number > this.guess) {
           this.messageEl.textContent = `Higher ↑ (${this.guess}) -  You are close by 25!`;
-        } else if (this.number < this.guess && this.guess - 25 < this.number) {
-          this.messageEl.textContent = `Lower ↓ (${this.guess}) -  You are close by 25 guessing!`;
+        } else if (difference < 25 && this.number < this.guess) {
+          this.messageEl.textContent = `Lower ↓ (${this.guess}) -  You are close by 25!`;
         }
 
         // If player's guess is 10 off away from the number to guess
-        if (this.number > this.guess && this.guess + 10 > this.number) {
+        if (difference < 10 && this.number > this.guess) {
           this.messageEl.textContent = `Higher ↑ (${this.guess}) -  You are close by 10!`;
-        } else if (this.number < this.guess && this.guess - 10 < this.number) {
-          this.messageEl.textContent = `Lower ↓ (${this.guess}) -  You are close by 10 guessing!`;
+        } else if (difference < 10 && this.number < this.guess) {
+          this.messageEl.textContent = `Lower ↓ (${this.guess}) -  You are close by 10!`;
         }
       }
 

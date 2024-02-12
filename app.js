@@ -200,10 +200,7 @@ class App {
         this.guess = this.inputs[0] + this.inputs[1];
         break;
       case 'sub':
-        this.guess =
-          this.inputs[0] >= this.inputs[1]
-            ? this.inputs[0] - this.inputs[1]
-            : this.inputs[1] - this.inputs[0];
+        this.guess = Math.abs(this.inputs[0] - this.inputs[1]);
         break;
       case 'mult':
         this.guess = this.inputs[0] * this.inputs[1];
@@ -223,12 +220,8 @@ class App {
 
     // DEVELOPMENT USE ONLY //////////////////////////////
 
-    /*
-
     console.log(`Number to Guess: ${this.number}`);
     console.log(`Player Guess: ${this.guess}`);
-
-    */
 
     //////////////////////////////////////////////////////
 
@@ -248,6 +241,41 @@ class App {
       if (this.__lives >= 1) {
         this.__removeLife();
 
+        const updateMessageString = (type, amountBy) => {
+          let higherLower;
+          let amount = '';
+
+          if (type === 'higher') higherLower = 'Higher ↑';
+          if (type === 'lower') higherLower = 'Lower ↓';
+
+          if (amountBy === '25') amount = '-  You are close by 25!';
+          if (amountBy === '10') amount = '-  You are close by 10!';
+
+          return (this.messageEl.textContent = `${higherLower} (${this.guess}) ${amount}`);
+        };
+
+        // If player's guess isn't close
+        if (this.number > this.guess) {
+          updateMessageString('higher');
+        } else {
+          updateMessageString('lower');
+        }
+
+        // If player's guess is 25 off away from the number to guess
+        if (difference < 25 && this.number > this.guess) {
+          updateMessageString('higher', '25');
+        } else if (difference < 25 && this.number < this.guess) {
+          updateMessageString('lower', '25');
+        }
+
+        // If player's guess is 10 off away from the number to guess
+        if (difference < 10 && this.number > this.guess) {
+          updateMessageString('higher', '10');
+        } else if (difference < 10 && this.number < this.guess) {
+          updateMessageString('lower', '10');
+        }
+
+        /*
         // If player's guess isn't close
         if (this.number > this.guess) {
           this.messageEl.textContent = `Higher ↑ (${this.guess})`;
@@ -267,7 +295,7 @@ class App {
           this.messageEl.textContent = `Higher ↑ (${this.guess}) -  You are close by 10!`;
         } else if (difference < 10 && this.number < this.guess) {
           this.messageEl.textContent = `Lower ↓ (${this.guess}) -  You are close by 10!`;
-        }
+        } */
       }
 
       if (this.__lives < 1) this.__loseGame();
